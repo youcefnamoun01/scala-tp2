@@ -29,6 +29,18 @@ libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.4.1"
 
 libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % "2.3.0"
 
+// Configuration
+libraryDependencies += "com.typesafe" % "config" % "1.4.3"
+
+
+//AWS RDS+SLICK
+libraryDependencies ++= Seq(
+  "com.typesafe.slick" %% "slick" % "3.5.1",
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.5.1", // gestion des connexions
+  "org.postgresql" % "postgresql" % "42.7.3"
+)
+
+
 
 
 // Here, `libraryDependencies` is a set of dependencies, and by using `+=`,

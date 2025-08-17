@@ -6,6 +6,7 @@ project/target/
 project/project/
 .scala_dependencies
 .worksheet
+resources/
 
 # sbt specific
 .cache/
