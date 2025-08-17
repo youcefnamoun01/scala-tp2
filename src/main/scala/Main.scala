@@ -47,7 +47,7 @@ object Main extends App {
   println("RETOURS DE DOCUMENTS:")
   user1.returnDocument(book1)
   user3.returnDocument(comic2)
-  user2.returnDocument(book2) // Tentative de retour d'un livre non emprunté
+  user2.returnDocument(book2) // Retour d'un livre non emprunté
   
   // Affichage final de tous les documents
   println("DOCUMENTS:")
