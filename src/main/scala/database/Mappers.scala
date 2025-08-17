@@ -1,9 +1,9 @@
 object Mapper {
 
-  def toEntity(doc: Document): DocumentEntity = doc match {
-    case b: Book     => DocumentEntity(None, b.title, b.author, b.year, "Book", b.genre, b.isBorrowed)
-    case m: Magazine => DocumentEntity(None, m.title, m.author, m.year, "Magazine", m.editionNumber.toString, m.isBorrowed)
-    case c: Comic    => DocumentEntity(None, c.title, c.author, c.year, "Comic", c.seriesVolume.toString, c.isBorrowed)
+  def toEntity(doc: Document, id: Option[Int] = None): DocumentEntity = doc match {
+    case b: Book     => DocumentEntity(id, b.title, b.author, b.year, "Book", b.genre, b.isBorrowed)
+    case m: Magazine => DocumentEntity(id, m.title, m.author, m.year, "Magazine", m.editionNumber.toString, m.isBorrowed)
+    case c: Comic    => DocumentEntity(id, c.title, c.author, c.year, "Comic", c.seriesVolume.toString, c.isBorrowed)
   }
 
   def fromEntity(e: DocumentEntity): Document = e.docType match {

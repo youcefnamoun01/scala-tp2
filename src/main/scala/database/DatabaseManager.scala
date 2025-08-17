@@ -30,8 +30,11 @@ object DatabaseManager {
     println("Tables créées ou déjà existantes")
   }
 
-  def insertDocument(doc: DocumentEntity): Unit =
-    Await.result(db.run(documents += doc), 5.seconds)
+  def insertDocument(doc: DocumentEntity): Int = {
+    val insert = (documents returning documents.map(_.id)) += doc
+    Await.result(db.run(insert), 5.seconds)
+  }
+
 
   def insertUser(user: UserEntity): Unit =
     Await.result(db.run(users += user), 5.seconds)
@@ -41,4 +44,11 @@ object DatabaseManager {
 
   def listUsers(): Seq[UserEntity] =
     Await.result(db.run(users.result), 5.seconds)
+
+  def updateBorrowStatus(docId: Int, borrowed: Boolean): Unit = {
+    val q = documents.filter(_.id === docId).map(_.isBorrowed).update(borrowed)
+    Await.result(db.run(q), 5.seconds)
+    println(s"Document $docId mis à jour en DB : isBorrowed = $borrowed")
+  }
+
 }

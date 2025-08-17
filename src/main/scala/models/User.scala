@@ -3,27 +3,23 @@ class User(val name: String) {
 
 
   // Emprunter un document
-  def borrowDocument(document: Document): Boolean = {
-    if (document.borrow()) {
-      borrowedDocs = document :: borrowedDocs
-      println(s"$name a emprunté: ${document.title}")
+  def borrowDocument(doc: Document, docId: Int): Boolean = {
+    if (doc.borrow()) {
+      borrowedDocs = doc :: borrowedDocs
+      DatabaseManager.updateBorrowStatus(docId, true)  // synchro DB
       true
-    } else {
-      println(s"Le document '${document.title}' n'est pas disponible")
-      false
-    }
+    } else false
   }
+
+
   
   // Retourner un document
-  def returnDocument(document: Document): Boolean = {
-    if (borrowedDocs.contains(document) && document.returnItem()) {
-      borrowedDocs = borrowedDocs.filterNot(_ == document)
-      println(s"$name a retourné: ${document.title}")
+  def returnDocument(doc: Document, docId: Int): Boolean = {
+    if (doc.returnItem()) {
+      borrowedDocs = borrowedDocs.filterNot(_ == doc)
+      DatabaseManager.updateBorrowStatus(docId, false) // synchro DB
       true
-    } else {
-      println(s"$name n'a pas emprunté ce document ou erreur lors du retour")
-      false
-    }
+    } else false
   }
   
   // Lister les documents empruntés

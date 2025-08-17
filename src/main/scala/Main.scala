@@ -1,29 +1,35 @@
 object Main {
   def main(args: Array[String]): Unit = {
     DatabaseManager.initSchema()
-
     val library = new Library
 
+    // Ajouter un document
     val book1 = new Book("1984", "George Orwell", 1949, "Dystopian")
-    val mag1 = new Magazine("Science Today", "Editorial Team", 2021, 12)
-
-    // En mémoire
-    library.addDocument(book1)
-    library.addDocument(mag1)
-
-    // En DB
-    DatabaseManager.insertDocument(Mapper.toEntity(book1))
-    DatabaseManager.insertDocument(Mapper.toEntity(mag1))
+    val book1Id = DatabaseManager.insertDocument(Mapper.toEntity(book1))
 
     val user1 = new User("Alice")
-    library.addUser(user1)
     DatabaseManager.insertUser(UserEntity(None, user1.name))
+    library.addUser(user1)
 
-    println("\n📚 Documents en mémoire:")
+    println("\n📚 Documents avant emprunt:")
+    library.addDocument(book1)
     library.listAvailableDocuments()
 
-    println("\n💾 Documents en DB:")
-    val docsDB = DatabaseManager.listDocuments()
-    docsDB.foreach(d => println(s"- ${d.title} (${d.docType})"))
+    // Alice emprunte 1984
+    println("\n➡️ Alice emprunte 1984")
+    user1.borrowDocument(book1, book1Id)
+
+    println("\n📚 Documents disponibles après emprunt (mémoire):")
+    library.listAvailableDocuments()
+
+    println("\n💾 Documents en DB après emprunt:")
+    DatabaseManager.listDocuments().foreach(d => println(s"- ${d.title}, borrowed = ${d.isBorrowed}"))
+
+    // Alice retourne 1984
+    println("\n↩️ Alice retourne 1984")
+    user1.returnDocument(book1, book1Id)
+
+    println("\n💾 Documents en DB après retour:")
+    DatabaseManager.listDocuments().foreach(d => println(s"- ${d.title}, borrowed = ${d.isBorrowed}"))
   }
 }
