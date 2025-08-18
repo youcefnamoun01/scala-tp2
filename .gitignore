@@ -4,6 +4,7 @@
 target/
 project/target/
 project/project/
+ressources/
 .scala_dependencies
 .worksheet
 
@@ -17,6 +18,7 @@ src_managed/
 project/boot/
 project/plugins/project/
 project/local-plugins.sbt
+resources/
 .sbt-scripted/
 local.sbt
 
