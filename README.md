@@ -13,6 +13,7 @@ Ce projet consiste à réaliser une application en **Scala** permettant de gére
 - Typesafe Config : gestion des fichiers de configuration (application.conf)
 - AWS RDS : Gestionnaire de base de données relationnelle
 - PosgreSQL : Base de données relationnelle
+- Slick : ORM (Object-Relational-Mapping) pour Scala
 
 ---
 
@@ -50,7 +51,7 @@ Ce projet consiste à réaliser une application en **Scala** permettant de gére
 
 1. Cloner le projet :
 
-   `git clone https://github.com/username/library-project-scala.git`
+   `git clone https://github.com/youcefnamoun01/scala-tp2.git`
 
 2- Ajouter les variables de configurations AWS dans le fichier main/resources/application.config
 
