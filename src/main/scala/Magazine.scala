@@ -4,7 +4,7 @@ class Magazine(title: String, author: String, year: Int, val editionNumber: Int)
 
     // Description du Magazine
     override def description(): String = {
-        s"Magazine: '$title' - Auteur: $author - Annee $year - Édition n°$editionNumber - Status: $getBorrowStatus"
+        s"Magazine: '$title' - Auteur: $author - Annee $year - Edition n°$editionNumber - Status: $getBorrowStatus"
     }
 
 }   

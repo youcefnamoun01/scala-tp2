@@ -1,5 +1,9 @@
 class Library {
+
+  // Liste des documents
   var documents: List[Document] = List()
+
+  // Liste des utilisateurs
   var users: List[User] = List()
   
   // Ajout d'un document à la bibliothèque
